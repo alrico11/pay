@@ -1,5 +1,4 @@
 const readlineSync = require('readline-sync');
-const puppeteer = require('puppeteer-extra');
 var random_name = require('node-random-name');
 const fs = require('fs');
 const delay = require('delay');
@@ -9,10 +8,7 @@ const { type } = require('os');
 var no = 1;
 var figlet = require('figlet');
 var chalk = require('chalk');
-var fetch = require('node-fetch')
-let schema = require('constants');
-let _ = require('lodash');
-const encodeData = require('querystring');
+
 
 let request = require("request-promise");
 const cookieJar = request.jar();
