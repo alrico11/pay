@@ -182,7 +182,7 @@ function getRandomInt(max) {
                     },
                     callback_uri: "https://www.spotify.com/signup/challenge?forward_url=https%3A%2F%2Fopen.spotify.com%2F%3F&locale=us",
                     client_info: {
-                        api_key: "a2d4b979dc624757b4fb47de483f3505",//"4c7a36d5260abca4af282779720cf631",//"a2d4b979dc624757b4fb47de483f3505",bff58e9698f40080ec4f9ad97a2f21e0
+                        api_key: "4c7a36d5260abca4af282779720cf631",//"4c7a36d5260abca4af282779720cf631",//"a2d4b979dc624757b4fb47de483f3505",bff58e9698f40080ec4f9ad97a2f21e0
                         app_version: "v2",
                         capabilities: [
                             1
