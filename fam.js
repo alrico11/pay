@@ -139,11 +139,13 @@ function getRandomInt(max) {
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/' + angka1 + '.' + angka2 + ' (KHTML, like Gecko) Chrome/' + angka2 + '.0.4280.' + angka1 + ' Safari/' + angka1 + '.' + angka2 + ' Edg/' + angka2 + '.0.' + angka1 + '.75',
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/' + angka1 + '.' + angka2 + ' (KHTML, like Gecko) Chrome/' + angka2 + '.0.3538.' + angka1 + ' Safari/' + angka1 + '.' + angka2 + ' Edge/' + angka2 + '.18363',
         ]
-        const apikeylist = [
+   const apikeylist = [
             'bff58e9698f40080ec4f9ad97a2f21e0',
-            '',
+            "4c7a36d5260abca4af282779720cf631",
+            "a2d4b979dc624757b4fb47de483f3505",
 
         ]
+        const randomApiKey = apikeylist[Math.floor(Math.random() * userAgentList.length)]
         var tgl = Math.floor(Math.random() * 19) + 10
         var bulan = Math.floor(Math.random() * 8) + 1
         const randomthn = tahun[Math.floor(Math.random() * tahun.length)];
@@ -182,7 +184,7 @@ function getRandomInt(max) {
                     },
                     callback_uri: "https://www.spotify.com/signup/challenge?forward_url=https%3A%2F%2Fopen.spotify.com%2F%3F&locale=us",
                     client_info: {
-                        api_key: "4c7a36d5260abca4af282779720cf631",//"4c7a36d5260abca4af282779720cf631",//"a2d4b979dc624757b4fb47de483f3505",bff58e9698f40080ec4f9ad97a2f21e0
+                        api_key: randomApiKey,
                         app_version: "v2",
                         capabilities: [
                             1
@@ -687,7 +689,7 @@ function getRandomInt(max) {
             await delay(10000)
             continue;
         }
-        if (max == 3) {
+        if (max == 2) {
             process.exit()
         }
     }
