@@ -2,9 +2,6 @@ const readlineSync = require('readline-sync');
 var random_name = require('node-random-name');
 const fs = require('fs');
 const delay = require('delay');
-const S = require('string');
-var no = 1;
-var moment = require("moment");
 var figlet = require('figlet');
 var chalk = require('chalk');
 
@@ -99,7 +96,7 @@ function getRandomInt(max) {
     const file2 = fs.readFileSync(cc2, 'UTF-8');
     const mntp2 = file2.split(/\r?\n/);
     while (i < mntp2.length) {
-        var pay = i + 50
+        var pay = i + 30
         no++
         console.log("")
         var nama1 = random_name({
@@ -126,7 +123,7 @@ function getRandomInt(max) {
         const randomDevices = version_ua_phone[Math.floor(Math.random() * version_ua_phone.length)];
         var email2 = nama1 + nama2 + hasil1 + randomEmail
 
-
+       
         const userAgentList = [
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/' + angka1 + '.36 (KHTML, like Gecko) Chrome/' + angka2 + '.0.4577.' + angka2 + ' Safari/' + angka1 + '.36',
             'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/' + angka1 + '.1.' + angka2 + ' (KHTML, like Gecko) Version/14.0.3 Mobile/15E' + angka1 + ' Safari/' + angka1 + '.1',
@@ -136,11 +133,12 @@ function getRandomInt(max) {
         ]
         const apikeylist = [
             'bff58e9698f40080ec4f9ad97a2f21e0',
-            '',
+            "4c7a36d5260abca4af282779720cf631",
+            "a2d4b979dc624757b4fb47de483f3505",
 
         ]
         const randomUserAgent = userAgentList[Math.floor(Math.random() * userAgentList.length)];
-
+        const randomApiKey = apikeylist[Math.floor(Math.random() * userAgentList.length)]
         function registemail() {
             axios({
                 method: "post",
@@ -216,11 +214,11 @@ function getRandomInt(max) {
                             email: email2,
                             password: "admin123"
                         },
-                        gender: 1
+                        gender: 2
                     },
                     callback_uri: "https://www.spotify.com/signup/challenge?forward_url=https%3A%2F%2Fopen.spotify.com%2F%3F&locale=us",
                     client_info: {
-                        api_key: "4c7a36d5260abca4af282779720cf631",//"4c7a36d5260abca4af282779720cf631",//"a2d4b979dc624757b4fb47de483f3505",bff58e9698f40080ec4f9ad97a2f21e0
+                        api_key: randomApiKey,
                         app_version: "v2",
                         capabilities: [
                             1
@@ -647,7 +645,7 @@ function getRandomInt(max) {
                 // console.log(tokenCVC)
                 // console.log(host)
                 // console.log(xcsrf)
-                let payment = await axios("https://www.spotify.com/api/payment-sdk/v2/prepare/premium/?clientName=premium-www-checkout&clientContext=premium-checkout&version=7.0.1", {
+                let payment = await axios("https://www.spotify.com/api/payment-sdk/v2/prepare/premium/?clientName=premium-www-checkout&clientContext=premium-checkout&version=6.5.0", {
                     method: 'post',
                     //   headers: formDataInfo.getHeaders(),
                     headers: {
@@ -677,7 +675,7 @@ function getRandomInt(max) {
                     resultpay = res.data
                     return statusPay, statusPremium
                 })
-
+                
                 if (statusPay != 200) {
                     continue;
                 } else if (statusPay == 200) {
@@ -739,24 +737,49 @@ function getRandomInt(max) {
                     else if (statusPremium == true) {
                         console.log(chalk.greenBright(o + ".  Berhasil Premium => " + email1 + +" Status Premium : " + statusPremium + " | " + cardnum + "|" + cardmonth + "|" + cardyear + "|" + cardcvv))
                         fs.appendFileSync("spotify indiv.txt", email1 + "\n");
-                        fs.appendFileSync("cc indiv trap.txt", email1 + "|" + cardnum + "|" + cardmonth + "|" + cardyear + "|" + cardcvv + "\n");
+                        fs.appendFileSync("cc indiv us trap.txt", email1 + "|" + cardnum + "|" + cardmonth + "|" + cardyear + "|" + cardcvv + "\n");
                         console.log("TUNGGU 1 MENIT")
                         await delay(60000)
-                        changeMail()
+                        let changeMail = await
+                            axios({
+                                method: "put",
+                                url: "https://spclient.wg.spotify.com/accountsettings/v1/profile/email",
+                                headers: {
+                                    'Accept-Language': 'id-ID;q=1, en-US;q=0.5',
+                                    'User-Agent': 'Spotify/8.8.4.518 Android/29 (Redmi Note 8)',
+                                    'Spotify-App-Version': '8.8.4.518',
+                                    // 'X-Client-Id': '9a8d2f0ce77a4e248bb71fefcb557637',
+                                    'App-Platform': 'Android',
+                                    // 'Client-Token': 'AAALYP9yS2rCM/4tD169Rn6epA40P/5NDRhw48CnOC+odIRLwuwzsBZWg5gioSFRhDu6H2NmDbq9cGJOC5+Iep4tH+ta639HeRGi+irNyujmQmd2HtQfkwmnk6GQ0gFRsct3NFF98cAJE+uUmmyzzxKTbYxX2vAA+yH2x/5B9ET0BjSWkN3i9W5/5gkg2DRvNqGhrlc/vrGo5radvkE7SOrPZ717/34/625zC4/CM6V/6XD/rzHuVfKIY9vqF5Dmki2nPwy4mUsyH/7j5302Ey0YvpuKp82w3xaTy4Zm0KKvQt8qYhOzl8jyDs7i',
+                                    'Authorization': 'Bearer ' + bearer,
+                                    'Content-Type': 'application/json; charset=UTF-8',
+                                    'Accept-Encoding': 'gzip',
+                                },
+                                data:
+                                {
+                                    email: email1,
+                                    password: "admin123"
+                                }
+                            }).then(function (res) {
+                                console.log(res.data)
+
+                            })
                         //registemail()
                         max++
                         break;
+            
+
                     }
                 }
                 continue;
             }
             o = 0
         } catch (err) {
-            console.log("TUNGGU 15 MENIT")
+            //console.log(err)
             await delay(10000)
             continue;
         }
-        if (max == 2) {
+        if (max == 1) {
             process.exit()
         }
     }
